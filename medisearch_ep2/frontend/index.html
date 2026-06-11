@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediSearch — Búsqueda médica con evidencia científica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">⬡</span>
+        <span class="logo-text">MediSearch</span>
+        <span class="version-badge">EP2</span>
+      </div>
+      <div class="header-right">
+        <span id="session-label" class="header-tag">Sesión: …</span>
+        <button id="btn-limpiar" class="btn-ghost" onclick="limpiarSesion()" title="Nueva sesión">↺ Nueva sesión</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <section class="hero">
+      <h1 class="hero-title">Información médica<br><em>basada en evidencia</em></h1>
+      <p class="hero-sub">Cada respuesta está respaldada por artículos científicos verificados. El agente razona paso a paso antes de responder.</p>
+    </section>
+
+    <section class="form-section">
+      <div class="form-card">
+        <div class="field">
+          <label class="field-label" for="pregunta">Tu consulta médica</label>
+          <textarea id="pregunta" class="field-textarea"
+            placeholder="Ej: ¿Qué causa la resistencia a la insulina en diabetes tipo 2?"
+            rows="3"></textarea>
+        </div>
+        <div class="field">
+          <label class="field-label" for="nivel">Perfil de usuario</label>
+          <div class="select-wrapper">
+            <select id="nivel" class="field-select">
+              <option value="lego">Persona sin formación médica</option>
+              <option value="profesional">Profesional de la salud</option>
+            </select>
+            <span class="select-arrow">▾</span>
+          </div>
+        </div>
+        <button id="btn-consultar" class="btn-primary" onclick="consultar()">
+          <span id="btn-text">Buscar evidencia</span>
+          <span id="btn-spinner" class="spinner oculto"></span>
+        </button>
+      </div>
+    </section>
+
+    <section id="resultado-section" class="resultado-section oculto">
+
+      <div id="badge-evidencia" class="badge badge-ok">
+        <span class="badge-dot"></span>
+        <span id="badge-text">Evidencia científica encontrada</span>
+      </div>
+
+      <div class="resultado-card">
+        <div class="resultado-header">
+          <span>📋</span>
+          <span>Respuesta</span>
+        </div>
+        <div id="respuesta-texto" class="resultado-body"></div>
+      </div>
+
+      <div id="fuentes-card" class="fuentes-card oculto">
+        <div class="fuentes-header">
+          <span>📄</span>
+          <span>Fuentes consultadas</span>
+        </div>
+        <ul id="fuentes-lista" class="fuentes-lista"></ul>
+      </div>
+
+      <!-- EP2: Panel de razonamiento ReAct -->
+      <div id="razon-card" class="razon-card oculto">
+        <div class="razon-header">
+          <span>🧠</span>
+          <span>Razonamiento del agente (ReAct)</span>
+        </div>
+        <ol id="razon-lista" class="razon-lista"></ol>
+      </div>
+
+    </section>
+
+    <div id="error-box" class="error-box oculto">
+      <strong>Error de conexión.</strong> Verifica que el backend esté activo en localhost:8000.
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <p>MediSearch EP2 — Proyecto académico DuocUC · <em>No reemplaza la consulta médica profesional.</em></p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
